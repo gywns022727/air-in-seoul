@@ -1,26 +1,14 @@
 import React from "react";
-import axios from "axios";
 
 function App() {
-  // axios({
-  //   method: "get",
-  //   url: "https://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureSidoLIst?serviceKey=Y3B8l56GfudHXlYGR67WwUIjqBTIac5s33DhjpdWXrjFSMf1uNRHM8EqvbpfZJ%2FQuRNtSA4LzLu39A3fQaTeCw%3D%3D&returnType=json&numOfRows=50&pageNo=1&sidoName=%EC%84%9C%EC%9A%B8&searchCondition=DAILY",
-  //   responseType: "json",
-  // }).then(function (api) {
-  //   const data = api.request.responseText;
-  //   console.log(JSON.parse(data));
-  // });
+  // console.log("PM10: " + PM10);
+  // console.log("PM25: " + PM25);
+  // console.log("CO: " + CO);
+  // console.log("NO2: " + NO2);
+  // console.log("O3: " + O3);
+  // console.log("SO2: " + SO2);
+  // console.log("total: " + totlaData);
 
-  axios({
-    method: "get",
-    url: "https://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?serviceKey=Y3B8l56GfudHXlYGR67WwUIjqBTIac5s33DhjpdWXrjFSMf1uNRHM8EqvbpfZJ%2FQuRNtSA4LzLu39A3fQaTeCw%3D%3D&returnType=json&numOfRows=50&pageNo=1&itemCode=PM10&dataGubun=DAILY&searchCondition=WEEK",
-    responseType: "json",
-  }).then(function (api) {
-    const local = api.request.responseText;
-    const jsonData = JSON.parse(local);
-    // const localdata = jsonData.filter((jsonData = "용산구"));
-    console.log(jsonData);
-  });
   return <div className="App"></div>;
 }
 
