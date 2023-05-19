@@ -1,4 +1,5 @@
 import React from "react";
+import AirPollutantsData from "./api/AirPollutantsData";
 
 function App() {
   // console.log("PM10: " + PM10);
@@ -8,8 +9,11 @@ function App() {
   // console.log("O3: " + O3);
   // console.log("SO2: " + SO2);
   // console.log("total: " + totlaData);
-
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <AirPollutantsData />
+    </div>
+  );
 }
 
 export default App;

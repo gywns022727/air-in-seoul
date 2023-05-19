@@ -30,5 +30,13 @@ export default function AirPollutantsData() {
         })
       );
   }, [setPM10, setPM25, setCO, setNO2, setO3, setSO2, setTotalDate]);
+
+  console.log("PM10: " + PM10);
+  console.log("PM25: " + PM25);
+  console.log("CO: " + CO);
+  console.log("NO2: " + NO2);
+  console.log("O3: " + O3);
+  console.log("SO2: " + SO2);
+  console.log("total: " + totlaData);
   return <div>AirPollutantsData</div>;
 }
