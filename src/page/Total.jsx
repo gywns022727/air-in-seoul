@@ -3,9 +3,9 @@ import styled from "styled-components";
 import AirContainer from "../components/AirContainer";
 import AirIcon from "../assets/images/air.png";
 import Good from "../assets/images/good.png";
-// import Average from "../assets/images/average.png";
-// import Bad from "../assets/images/bad.png";
-// import VeryBad from "../assets/images/veryBad.png";
+import Average from "../assets/images/average.png";
+import Bad from "../assets/images/bad.png";
+import VeryBad from "../assets/images/veryBad.png";
 import PM10Icon from "../assets/images/pm10.png";
 import PM25Icon from "../assets/images/pm25.png";
 import COIcon from "../assets/images/co.png";
@@ -18,22 +18,46 @@ export default function Total() {
   const { PM10Data, PM25Data, COData, NO2Data, O3Data, SO2Data, totlaData } =
     useContext(ApiContext);
 
+  let totlaCudition = "";
+  if (totlaData <= 50) {
+    totlaCudition = "좋음";
+  } else if (totlaData <= 100) {
+    totlaCudition = "보통";
+  } else if (totlaData <= 150) {
+    totlaCudition = "나쁨";
+  } else if (totlaData > 150) {
+    totlaCudition = "매우나쁨";
+  }
+
   return (
     <Wrap>
       <TotalContainer>
         <div className="totalGraphDiv">
           <div>
             <TotalImg src={AirIcon} alt="TotalIcon" />
-            <span>통합공기질 {totlaData}</span>
+            <span>서울 대기질 지수</span>
           </div>
           <Graph></Graph>
         </div>
         <div className="totalTextDiv">
-          <span>
+          <AirCuditionText data={totlaData}>
             오늘의 <br /> 공기질
-          </span>
-          <AirCudition>좋음</AirCudition>
-          <ImgCudition src={Good} alt="ImgCudition"></ImgCudition>
+          </AirCuditionText>
+          <AirCudition>{totlaCudition}</AirCudition>
+          <ImgCudition
+            src={
+              totlaData <= 50
+                ? Good
+                : totlaData <= 100
+                ? Average
+                : totlaData <= 150
+                ? Bad
+                : totlaData > 150
+                ? VeryBad
+                : ""
+            }
+            alt="ImgCudition"
+          ></ImgCudition>
         </div>
       </TotalContainer>
       <SubContainer>
@@ -108,12 +132,11 @@ const TotalContainer = styled.div`
       }
     }
   }
+
   > .totalTextDiv {
     display: flex;
     align-items: center;
     > span {
-      font-size: 12px;
-      color: #60b6f1;
       @media (width: 280px) {
         display: none;
       }
@@ -136,6 +159,20 @@ const Graph = styled.div`
 const AirCudition = styled.div`
   padding: 0 10px;
   font-size: 12px;
+`;
+
+const AirCuditionText = styled.span`
+  font-size: 12px;
+  color: ${(props) =>
+    props.data <= 50
+      ? "#60b6f1"
+      : props.data <= 100
+      ? "#2ab57f"
+      : props.data <= 150
+      ? "#fab32a"
+      : props.data > 150
+      ? "#e51831"
+      : "#000"};
 `;
 
 const ImgCudition = styled.img`
