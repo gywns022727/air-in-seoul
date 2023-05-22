@@ -93,7 +93,6 @@ const Range = styled.input`
   margin-top: 5px;
   width: 150px;
   height: 20px;
-  -webkit-slider-thumb: ${(props) => props.color};
   @media (max-width: 280px) {
     width: 130px;
   }

@@ -19,14 +19,19 @@ export default function Total() {
     useContext(ApiContext);
 
   let totlaCudition = "";
+  let rangeValue = 0;
   if (totlaData <= 50) {
     totlaCudition = "좋음";
+    rangeValue = 1;
   } else if (totlaData <= 100) {
     totlaCudition = "보통";
+    rangeValue = 2;
   } else if (totlaData <= 150) {
     totlaCudition = "나쁨";
+    rangeValue = 3;
   } else if (totlaData > 150) {
     totlaCudition = "매우나쁨";
+    rangeValue = 4;
   }
 
   return (
@@ -37,7 +42,14 @@ export default function Total() {
             <TotalImg src={AirIcon} alt="TotalIcon" />
             <span>서울 대기질 지수</span>
           </div>
-          <Graph></Graph>
+          <Range
+            type="range"
+            value={rangeValue}
+            min={0}
+            max={4}
+            step="1"
+            readOnly
+          />
         </div>
         <div className="totalTextDiv">
           <AirCuditionText data={totlaData}>
@@ -347,13 +359,6 @@ const TotalImg = styled.img`
   width: 25px;
 `;
 
-const Graph = styled.div`
-  margin-top: 5px;
-  width: 180px;
-  height: 20px;
-  background-color: #60b6f1;
-`;
-
 const AirCudition = styled.div`
   padding: 0 10px;
   font-size: 12px;
@@ -388,5 +393,14 @@ const SubContainer = styled.div`
     border-radius: 3px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
     background-color: #fff;
+  }
+`;
+
+const Range = styled.input`
+  margin-top: 5px;
+  width: 150px;
+  height: 20px;
+  @media (max-width: 280px) {
+    width: 130px;
   }
 `;
