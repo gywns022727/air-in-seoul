@@ -78,6 +78,28 @@ export default function Total() {
               ? "매우나쁨"
               : ""
           }
+          rangeValue={
+            PM10Data <= 30
+              ? 1
+              : PM10Data <= 80
+              ? 2
+              : PM10Data <= 150
+              ? 3
+              : PM10Data > 150
+              ? 4
+              : 0
+          }
+          textColor={
+            PM10Data <= 30
+              ? "#60b6f1"
+              : PM10Data <= 80
+              ? "#2ab57f"
+              : PM10Data <= 150
+              ? "#fab32a"
+              : PM10Data > 150
+              ? "#e51831"
+              : "#000"
+          }
         ></AirContainer>
         <AirContainer
           navigate={"/pm25"}
@@ -95,6 +117,28 @@ export default function Total() {
               : PM25Data > 75
               ? "매우나쁨"
               : ""
+          }
+          rangeValue={
+            PM25Data <= 15
+              ? 1
+              : PM25Data <= 35
+              ? 2
+              : PM25Data <= 75
+              ? 3
+              : PM25Data > 75
+              ? 4
+              : 0
+          }
+          textColor={
+            PM25Data <= 15
+              ? "#60b6f1"
+              : PM25Data <= 35
+              ? "#2ab57f"
+              : PM25Data <= 75
+              ? "#fab32a"
+              : PM25Data > 75
+              ? "#e51831"
+              : "#000"
           }
         ></AirContainer>
         <AirContainer
@@ -114,6 +158,28 @@ export default function Total() {
               ? "매우나쁨"
               : ""
           }
+          rangeValue={
+            COData <= 2.4
+              ? 1
+              : COData <= 9.4
+              ? 2
+              : COData <= 15.4
+              ? 3
+              : COData > 15.4
+              ? 4
+              : 0
+          }
+          textColor={
+            COData <= 2.4
+              ? "#60b6f1"
+              : COData <= 9.4
+              ? "#2ab57f"
+              : COData <= 15.4
+              ? "#fab32a"
+              : COData > 15.4
+              ? "#e51831"
+              : "#000"
+          }
         ></AirContainer>
         <AirContainer
           navigate={"/no2"}
@@ -131,6 +197,28 @@ export default function Total() {
               : NO2Data > 0.2
               ? "매우나쁨"
               : ""
+          }
+          rangeValue={
+            NO2Data <= 0.03
+              ? 1
+              : NO2Data <= 0.06
+              ? 2
+              : NO2Data <= 0.2
+              ? 3
+              : NO2Data > 0.2
+              ? 4
+              : 0
+          }
+          textColor={
+            NO2Data <= 0.03
+              ? "#60b6f1"
+              : NO2Data <= 0.06
+              ? "#2ab57f"
+              : NO2Data <= 0.2
+              ? "#fab32a"
+              : NO2Data > 0.2
+              ? "#e51831"
+              : "#000"
           }
         ></AirContainer>
         <AirContainer
@@ -150,6 +238,28 @@ export default function Total() {
               ? "매우나쁨"
               : ""
           }
+          rangeValue={
+            O3Data <= 0.003
+              ? 1
+              : O3Data <= 0.09
+              ? 2
+              : O3Data <= 0.15
+              ? 3
+              : O3Data > 0.15
+              ? 4
+              : 0
+          }
+          textColor={
+            O3Data <= 0.003
+              ? "#60b6f1"
+              : O3Data <= 0.09
+              ? "#2ab57f"
+              : O3Data <= 0.15
+              ? "#fab32a"
+              : O3Data > 0.15
+              ? "#e51831"
+              : "#000"
+          }
         ></AirContainer>
         <AirContainer
           navigate={"/so02"}
@@ -167,6 +277,28 @@ export default function Total() {
               : SO2Data > 0.15
               ? "매우나쁨"
               : ""
+          }
+          rangeValue={
+            SO2Data <= 0.02
+              ? 1
+              : SO2Data <= 0.05
+              ? 2
+              : SO2Data <= 0.15
+              ? 3
+              : SO2Data > 0.15
+              ? 4
+              : 0
+          }
+          textColor={
+            SO2Data <= 0.02
+              ? "#60b6f1"
+              : SO2Data <= 0.05
+              ? "#2ab57f"
+              : SO2Data <= 0.15
+              ? "#fab32a"
+              : SO2Data > 0.15
+              ? "#e51831"
+              : "#000"
           }
         ></AirContainer>
       </SubContainer>

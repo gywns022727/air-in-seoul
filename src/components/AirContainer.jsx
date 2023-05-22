@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function AirContainer(props) {
   const navigate = useNavigate();
-  console.log(typeof props.cudition);
   return (
     <Button
       onClick={() => {
@@ -16,9 +15,16 @@ export default function AirContainer(props) {
           <Icon src={props.icon} alt="Icon" />
           <span>{props.airName}</span>
         </div>
-        <Graph></Graph>
+        <Range
+          type="range"
+          value={props.rangeValue}
+          min={0}
+          max={4}
+          step="1"
+          readOnly
+        />
       </MainContent>
-      <SubContent>
+      <SubContent color={props.textColor}>
         <div>
           <span>{props.airData}</span>
           <span>{props.unit}</span>
@@ -62,17 +68,9 @@ const MainContent = styled.div`
 
 const SubContent = styled.div`
   display: flex;
-  color: ${(props) =>
-    props.cudition == "좋음"
-      ? "#60b6f1"
-      : props.cudition == "보통"
-      ? "#2ab57f"
-      : props.cudition == "나쁨"
-      ? "#fab32a"
-      : props.cudition == "매우나쁨"
-      ? "#e51831"
-      : "#000"};
-  @media screen and (max-width: 400px) {
+  align-items: center;
+  color: ${(props) => props.color};
+  @media screen and (max-width: 370px) {
     flex-direction: column;
   }
   > div {
@@ -91,12 +89,12 @@ const SubContent = styled.div`
   }
 `;
 
-const Graph = styled.div`
+const Range = styled.input`
   margin-top: 5px;
-  width: 180px;
+  width: 150px;
   height: 20px;
-  background-color: #60b6f1;
+  -webkit-slider-thumb: ${(props) => props.color};
   @media (max-width: 280px) {
-    width: 150px;
+    width: 130px;
   }
 `;
