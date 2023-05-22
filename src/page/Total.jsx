@@ -67,6 +67,17 @@ export default function Total() {
           airName={"미세먼지(PM10)"}
           unit={"ug/m3"}
           airData={PM10Data}
+          cudition={
+            PM10Data <= 30
+              ? "좋음"
+              : PM10Data <= 80
+              ? "보통"
+              : PM10Data <= 150
+              ? "나쁨"
+              : PM10Data > 150
+              ? "매우나쁨"
+              : ""
+          }
         ></AirContainer>
         <AirContainer
           navigate={"/pm25"}
@@ -74,6 +85,17 @@ export default function Total() {
           airName={"초미세먼지(PM2.5)"}
           unit={"ug/m3"}
           airData={PM25Data}
+          cudition={
+            PM25Data <= 15
+              ? "좋음"
+              : PM25Data <= 35
+              ? "보통"
+              : PM25Data <= 75
+              ? "나쁨"
+              : PM25Data > 75
+              ? "매우나쁨"
+              : ""
+          }
         ></AirContainer>
         <AirContainer
           navigate={"/co"}
@@ -81,6 +103,17 @@ export default function Total() {
           airName={"일산화탄소(CO)"}
           unit={"ppm"}
           airData={COData}
+          cudition={
+            COData <= 2.4
+              ? "좋음"
+              : COData <= 9.4
+              ? "보통"
+              : COData <= 15.4
+              ? "나쁨"
+              : COData > 15.4
+              ? "매우나쁨"
+              : ""
+          }
         ></AirContainer>
         <AirContainer
           navigate={"/no2"}
@@ -88,6 +121,17 @@ export default function Total() {
           airName={"이산화질소(NO2)"}
           unit={"ppm"}
           airData={NO2Data}
+          cudition={
+            NO2Data <= 0.03
+              ? "좋음"
+              : NO2Data <= 0.06
+              ? "보통"
+              : NO2Data <= 0.2
+              ? "나쁨"
+              : NO2Data > 0.2
+              ? "매우나쁨"
+              : ""
+          }
         ></AirContainer>
         <AirContainer
           navigate={"/o3"}
@@ -95,6 +139,17 @@ export default function Total() {
           airName={"오존(O3)"}
           unit={"ppm"}
           airData={O3Data}
+          cudition={
+            O3Data <= 0.003
+              ? "좋음"
+              : O3Data <= 0.09
+              ? "보통"
+              : O3Data <= 0.15
+              ? "나쁨"
+              : O3Data > 0.15
+              ? "매우나쁨"
+              : ""
+          }
         ></AirContainer>
         <AirContainer
           navigate={"/so02"}
@@ -102,6 +157,17 @@ export default function Total() {
           airName={"아항산가스(SO2)"}
           unit={"ppm"}
           airData={SO2Data}
+          cudition={
+            SO2Data <= 0.02
+              ? "좋음"
+              : SO2Data <= 0.05
+              ? "보통"
+              : SO2Data <= 0.15
+              ? "나쁨"
+              : SO2Data > 0.15
+              ? "매우나쁨"
+              : ""
+          }
         ></AirContainer>
       </SubContainer>
     </Wrap>
@@ -137,7 +203,7 @@ const TotalContainer = styled.div`
     display: flex;
     align-items: center;
     > span {
-      @media (width: 280px) {
+      @media (max-width: 280px) {
         display: none;
       }
     }
