@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import AirContainer from "../components/AirContainer";
 import AirIcon from "../assets/images/air.png";
@@ -12,26 +13,73 @@ import COIcon from "../assets/images/co.png";
 import NO2Icon from "../assets/images/no2.png";
 import O3Icon from "../assets/images/o3.png";
 import SO2Icon from "../assets/images/so2.png";
-import { ApiContext } from "../Context/ApiContext";
+import { Slider } from "material-ui-slider";
 
 export default function Total() {
-  const { PM10Data, PM25Data, COData, NO2Data, O3Data, SO2Data, totlaData } =
-    useContext(ApiContext);
+  const [PM10Data, setPM10Data] = useState();
+  const [PM25Data, setPM25Data] = useState();
+  const [COData, setCOData] = useState();
+  const [NO2Data, setNO2Data] = useState();
+  const [O3Data, setO3Data] = useState();
+  const [SO2Data, setSO2Data] = useState();
+  const [totlaData, setTotalDate] = useState();
+
+  useEffect(() => {
+    axios
+      .all([
+        axios.get(
+          "https://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureSidoLIst?serviceKey=" +
+            process.env.REACT_APP_AIR_POLLUTANTS +
+            "&returnType=json&numOfRows=50&pageNo=1&sidoName=%EC%84%9C%EC%9A%B8&searchCondition=DAILY"
+        ),
+        axios.get(
+          "https://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?serviceKey=" +
+            process.env.REACT_APP_TOTAL_DATA +
+            "&returnType=json&numOfRows=50&pageNo=1&itemCode=PM25&dataGubun=DAILY&searchCondition=WEEK"
+        ),
+      ])
+      .then(
+        axios.spread(async function (air, total) {
+          const airData = JSON.parse(air.request.response);
+          const totalData = JSON.parse(total.request.response);
+          setPM10Data(airData["response"]["body"]["items"]["0"]["pm10Value"]);
+          setPM25Data(airData["response"]["body"]["items"]["0"]["pm25Value"]);
+          setCOData(airData["response"]["body"]["items"]["0"]["coValue"]);
+          setNO2Data(airData["response"]["body"]["items"]["0"]["no2Value"]);
+          setO3Data(airData["response"]["body"]["items"]["0"]["o3Value"]);
+          setSO2Data(airData["response"]["body"]["items"]["0"]["so2Value"]);
+          setTotalDate(totalData["response"]["body"]["items"]["0"]["seoul"]);
+        })
+      );
+  }, [
+    setPM10Data,
+    setPM25Data,
+    setCOData,
+    setNO2Data,
+    setO3Data,
+    setSO2Data,
+    setTotalDate,
+  ]);
 
   let totlaCudition = "";
   let rangeValue = 0;
+  let color = "";
   if (totlaData <= 50) {
     totlaCudition = "좋음";
     rangeValue = 1;
+    color = "#60b6f1";
   } else if (totlaData <= 100) {
     totlaCudition = "보통";
     rangeValue = 2;
+    color = "#2ab57f";
   } else if (totlaData <= 150) {
     totlaCudition = "나쁨";
     rangeValue = 3;
+    color = "#fab32a";
   } else if (totlaData > 150) {
     totlaCudition = "매우나쁨";
     rangeValue = 4;
+    color = "#e51831";
   }
 
   return (
@@ -42,13 +90,14 @@ export default function Total() {
             <TotalImg src={AirIcon} alt="TotalIcon" />
             <span>서울 대기질 지수</span>
           </div>
-          <Range
-            type="range"
-            value={rangeValue}
+          <Slider
+            aria-label="Default"
+            valueLabelDisplay="auto"
+            step={1}
             min={0}
             max={4}
-            step="1"
-            readOnly
+            value={rangeValue}
+            color={color}
           />
         </div>
         <div className="totalTextDiv">
@@ -314,12 +363,22 @@ export default function Total() {
           }
         ></AirContainer>
       </SubContainer>
+      <ScreenLock></ScreenLock>
     </Wrap>
   );
 }
 
 const Wrap = styled.div`
-  background-color: #fafafa;
+  background-color: #f7f7f7;
+`;
+
+const ScreenLock = styled.div`
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 const TotalContainer = styled.div`
@@ -337,6 +396,10 @@ const TotalContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     > div {
+      position: relative;
+      top: 10px;
+      display: flex;
+      align-items: center;
       > span {
         font-size: 12px;
       }
@@ -393,14 +456,5 @@ const SubContainer = styled.div`
     border-radius: 3px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
     background-color: #fff;
-  }
-`;
-
-const Range = styled.input`
-  margin-top: 5px;
-  width: 150px;
-  height: 20px;
-  @media (max-width: 280px) {
-    width: 130px;
   }
 `;

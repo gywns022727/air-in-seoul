@@ -1,29 +1,21 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import { Slider } from "material-ui-slider";
 
 export default function AirContainer(props) {
-  const navigate = useNavigate();
   return (
-    <Button
-      onClick={() => {
-        navigate(props.navigate);
-      }}
-    >
+    <Button>
       <MainContent>
         <div>
           <Icon src={props.icon} alt="Icon" />
           <span>{props.airName}</span>
         </div>
         <Slider
+          aria-label="Default"
+          valueLabelDisplay="auto"
+          step={1}
           min={0}
           max={4}
-          marks
-          step={1}
-          onChange={() => {}}
-          disabled
-          readOnly
           value={props.rangeValue}
           color={props.textColor}
         />
@@ -50,6 +42,8 @@ const Button = styled.button`
 `;
 
 const Icon = styled.img`
+  position: relative;
+  top: 10px;
   width: 32px;
   @media (max-width: 280px) {
     width: 30px;
@@ -61,8 +55,14 @@ const MainContent = styled.div`
   flex-direction: column;
   align-items: flex-start;
   > div {
+    width: 150px;
+    display: flex;
+    align-items: center;
     > span {
+      position: relative;
+      top: 10px;
       padding-left: 10px;
+      font-size: 12px;
       @media (max-width: 280px) {
         font-size: 12px;
       }
