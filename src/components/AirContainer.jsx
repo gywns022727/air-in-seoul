@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { Slider } from "material-ui-slider";
 
 export default function AirContainer(props) {
   const navigate = useNavigate();
@@ -15,13 +16,16 @@ export default function AirContainer(props) {
           <Icon src={props.icon} alt="Icon" />
           <span>{props.airName}</span>
         </div>
-        <Range
-          type="range"
-          value={props.rangeValue}
+        <Slider
           min={0}
           max={4}
-          step="1"
+          marks
+          step={1}
+          onChange={() => {}}
+          disabled
           readOnly
+          value={props.rangeValue}
+          color={props.textColor}
         />
       </MainContent>
       <SubContent color={props.textColor}>
@@ -86,14 +90,5 @@ const SubContent = styled.div`
     @media (width: 280px) {
       font-size: 11px;
     }
-  }
-`;
-
-const Range = styled.input`
-  margin-top: 5px;
-  width: 150px;
-  height: 20px;
-  @media (max-width: 280px) {
-    width: 130px;
   }
 `;
