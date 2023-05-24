@@ -83,6 +83,7 @@ const SubContent = styled.div`
   > div {
     > span {
       padding: 0 5px;
+      font-size: 15px;
       @media (width: 280px) {
         font-size: 11px;
       }
@@ -90,6 +91,8 @@ const SubContent = styled.div`
   }
   > span {
     padding: 0 5px;
+    font-size: 15px;
+
     @media (width: 280px) {
       font-size: 11px;
     }
