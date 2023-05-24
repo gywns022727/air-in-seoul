@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Slider } from "material-ui-slider";
+import { Slider } from "@material-ui/core";
 
 export default function AirContainer(props) {
   return (
@@ -17,7 +17,9 @@ export default function AirContainer(props) {
           min={0}
           max={4}
           value={props.rangeValue}
-          color={props.textColor}
+          style={{
+            color: props.textColor,
+          }}
         />
       </MainContent>
       <SubContent color={props.textColor}>

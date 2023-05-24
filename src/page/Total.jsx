@@ -13,7 +13,8 @@ import COIcon from "../assets/images/co.png";
 import NO2Icon from "../assets/images/no2.png";
 import O3Icon from "../assets/images/o3.png";
 import SO2Icon from "../assets/images/so2.png";
-import { Slider } from "material-ui-slider";
+// import { Slider } from "material-ui-slider";
+import { Slider } from "@material-ui/core";
 
 export default function Total() {
   const [PM10Data, setPM10Data] = useState();
@@ -97,7 +98,9 @@ export default function Total() {
             min={0}
             max={4}
             value={rangeValue}
-            color={color}
+            style={{
+              color: color,
+            }}
           />
         </div>
         <div className="totalTextDiv">
