@@ -13,8 +13,7 @@ import COIcon from "../assets/images/co.png";
 import NO2Icon from "../assets/images/no2.png";
 import O3Icon from "../assets/images/o3.png";
 import SO2Icon from "../assets/images/so2.png";
-// import { Slider } from "material-ui-slider";
-import { Slider } from "@material-ui/core";
+import { Slider } from "@mui/material";
 
 export default function Total() {
   const [PM10Data, setPM10Data] = useState();
@@ -94,6 +93,7 @@ export default function Total() {
           <Slider
             aria-label="Default"
             valueLabelDisplay="auto"
+            size="small"
             step={1}
             min={0}
             max={4}

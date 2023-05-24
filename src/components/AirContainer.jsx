@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Slider } from "@material-ui/core";
+import { Slider } from "@mui/material";
 
 export default function AirContainer(props) {
   return (
@@ -13,6 +13,7 @@ export default function AirContainer(props) {
         <Slider
           aria-label="Default"
           valueLabelDisplay="auto"
+          size="small"
           step={1}
           min={0}
           max={4}
